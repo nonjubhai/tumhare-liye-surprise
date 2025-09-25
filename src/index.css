@@ -2,41 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Sweet pastel design system for the special website 💖
+All colors MUST be HSL for the sweet theme.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Sweet pastel background gradients */
+    --background: 330 100% 98%;
+    --foreground: 340 15% 25%;
 
+    /* Card system - soft whites with pink undertones */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 340 15% 25%;
+    --card-shadow: 330 50% 85%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 340 15% 25%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - soft romantic pink */
+    --primary: 330 60% 70%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 330 80% 85%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - warm peachy pink */
+    --secondary: 340 40% 92%;
+    --secondary-foreground: 340 15% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted tones - soft lavender grays */
+    --muted: 320 20% 95%;
+    --muted-foreground: 340 10% 50%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - gentle lavender */
+    --accent: 280 30% 88%;
+    --accent-foreground: 340 15% 25%;
 
+    /* Sweet interactions */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 330 25% 90%;
+    --input: 330 25% 92%;
+    --ring: 330 60% 70%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
+
+    /* Custom gradients */
+    --gradient-sweet: linear-gradient(135deg, hsl(330 60% 95%), hsl(340 40% 98%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(330 30% 98%));
+    --gradient-button: linear-gradient(135deg, hsl(330 60% 70%), hsl(340 50% 75%));
+    
+    /* Sweet shadows */
+    --shadow-sweet: 0 8px 32px -8px hsl(330 50% 85% / 0.3);
+    --shadow-card: 0 4px 20px -4px hsl(330 40% 80% / 0.2);
+    --shadow-hover: 0 12px 40px -8px hsl(330 60% 80% / 0.4);
+
+    /* Animation timings */
+    --transition-sweet: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +122,85 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-poppins;
+    background: var(--gradient-sweet);
+    min-height: 100vh;
+  }
+}
+
+/* Sweet custom components */
+@layer components {
+  .sweet-card {
+    @apply bg-card rounded-2xl p-6 shadow-card border border-border/50;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-sweet);
+  }
+  
+  .sweet-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+  
+  .sweet-button {
+    @apply px-8 py-4 rounded-full font-medium text-primary-foreground border-0 cursor-pointer;
+    background: var(--gradient-button);
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-sweet);
+  }
+  
+  .sweet-button:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-1px);
+  }
+
+  .heart-float {
+    animation: heartFloat 2s ease-in-out infinite;
+  }
+
+  .confetti-burst {
+    animation: confettiBurst 0.6s ease-out;
+  }
+}
+
+/* Sweet animations */
+@layer utilities {
+  @keyframes heartFloat {
+    0%, 100% { 
+      transform: translateY(0px) scale(1); 
+    }
+    50% { 
+      transform: translateY(-10px) scale(1.1); 
+    }
+  }
+
+  @keyframes confettiBurst {
+    0% { 
+      transform: scale(0) rotate(0deg);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.2) rotate(180deg);
+      opacity: 0.8;
+    }
+    100% { 
+      transform: scale(1.5) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
   }
 }
